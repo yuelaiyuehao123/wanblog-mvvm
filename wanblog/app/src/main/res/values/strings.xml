@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">WanBlog</string>
+
+    <string name="bottom_home">首页</string>
+    <string name="bottom_me">我的</string>
+
+    <string name="me_billing_details">账单明细</string>
+    <string name="me_about_lexiaoian">获取联系人信息</string>
+    <string name="me_settings">设置</string>
+    <string name="forget_password">忘记密码?</string>
+
+    <string name="blog_top1">第一名</string>
+    <string name="blog_top2">第二名</string>
+    <string name="blog_top3">第三名</string>
+
 </resources>

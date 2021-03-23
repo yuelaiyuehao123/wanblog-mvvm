@@ -1,12 +1,16 @@
 package com.wanblog.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.wanblog.R
+import com.wanblog.base.BaseActivity
+import com.wanblog.databinding.ActivityMainBinding
+import com.wanblog.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
+
+    override fun layoutId(): Int = R.layout.activity_main
+
+    override fun initView(savedInstanceState: Bundle?) {
     }
+
 }
