@@ -3,13 +3,19 @@
 
 ## 技术栈
 - mvvm
-- androidx
 - kotlin
 - anko
-- rxjava3
+- jetpack
+- androidx
+- navigation
+- viewmodel
+- livedata
+- dataBinding
 - okhttp3
-- rxbinding4
 - retrofit2
 
+## MVP方式实现 
+[https://github.com/yuelaiyuehao123/wanblog-mvp](https://github.com/yuelaiyuehao123/wanblog-mvp)
+
 ## 服务端 
-[传送门](https://github.com/yuelaiyuehao123/wanblog-server)
+[https://github.com/yuelaiyuehao123/wanblog-server](https://github.com/yuelaiyuehao123/wanblog-server)
