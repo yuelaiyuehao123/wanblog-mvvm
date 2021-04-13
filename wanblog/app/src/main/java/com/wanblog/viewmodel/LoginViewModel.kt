@@ -14,18 +14,11 @@ class LoginViewModel : BaseViewModel() {
 
     //用户名
     var username = StringLiveData()
-
-    //密码(登录注册界面)
+    //密码
     var password = StringLiveData()
-
-    var password2 = StringLiveData()
-
     //是否显示明文密码（登录注册界面）
     var isShowPwd = BooleanLiveData()
-
-    var isShowPwd2 = BooleanLiveData()
-
-    //方式1  自动脱壳过滤处理请求结果，判断结果是否成功
+    //
     var loginResult = MutableLiveData<UserInfo>()
 
     /**

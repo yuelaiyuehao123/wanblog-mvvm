@@ -2,31 +2,44 @@ package com.wanblog.ui.fragment
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.wanblog.R
-import com.wanblog.WanBlogApp
 import com.wanblog.base.BaseFragment
-import com.wanblog.databinding.FragmentMeBinding
 import com.wanblog.ext.jumpByLogin
 import com.wanblog.ext.nav
 import com.wanblog.ext.navigateAction
-import com.wanblog.ext.util.notNull
-import com.wanblog.util.ColorUtil
-import com.wanblog.util.LogUtils
 import com.wanblog.util.UserUtil
 import com.wanblog.viewmodel.MeViewModel
 import kotlinx.android.synthetic.main.dialog_logout.view.*
+import kotlinx.android.synthetic.main.fragment_me.*
 
-class MeFragment : BaseFragment<MeViewModel, FragmentMeBinding>() {
+class MeFragment : BaseFragment<MeViewModel>() {
 
     override fun layoutId(): Int = R.layout.fragment_me
 
     override fun initView(savedInstanceState: Bundle?) {
-        mDatabind.vm = mViewModel
-        mDatabind.click = ProxyClick()
+
+        me_linear.setOnClickListener {
+            nav().jumpByLogin {
+                showLogoutDialog()
+            }
+        }
+        ll_me_collect.setOnClickListener {
+            nav().jumpByLogin {
+                it.navigateAction(R.id.action_mainfragment_to_collectActivity)
+            }
+        }
+        ll_me_wenzhang.setOnClickListener {
+            nav().jumpByLogin {
+                Toast.makeText(activity, "点击了文章.", Toast.LENGTH_LONG).show()
+            }
+        }
+        ll_me_shezhi.setOnClickListener {
+            nav().navigateAction(R.id.action_mainfragment_to_settingActivity)
+        }
+
     }
 
     override fun createObserver() {
@@ -38,41 +51,22 @@ class MeFragment : BaseFragment<MeViewModel, FragmentMeBinding>() {
         }
     }
 
+    override fun lazyLoadData() {
+    }
+
     override fun initData() {
         val name: String
         val imageUrl: String
         if (UserUtil.isLogin(mActivity)) {
             name = UserUtil.getUserName(mActivity)
-            imageUrl = UserUtil.getUserImage(mActivity)
+//            imageUrl = UserUtil.getUserImage(mActivity)
+            imageUrl = "http://test-public-cn.bj.bcebos.com/sota/test/500939980.jpg"
         } else {
             name = "请登录"
             imageUrl = ""
         }
         mViewModel.userName.value = name
         mViewModel.imageUrl.value = imageUrl
-    }
-
-    inner class ProxyClick {
-
-        fun login() {
-            nav().jumpByLogin {
-                showLogoutDialog()
-            }
-        }
-
-        fun collect() {
-            nav().jumpByLogin {
-                it.navigateAction(R.id.action_mainfragment_to_collectActivity)
-            }
-        }
-
-        fun ariticle() {
-        }
-
-        fun setting() {
-            nav().navigateAction(R.id.action_mainfragment_to_settingActivity)
-        }
-
     }
 
     private fun showLogoutDialog() {
@@ -89,5 +83,6 @@ class MeFragment : BaseFragment<MeViewModel, FragmentMeBinding>() {
             dialog.dismiss()
         }
     }
+
 
 }

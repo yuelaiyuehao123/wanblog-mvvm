@@ -20,7 +20,6 @@ import com.kingja.loadsir.core.LoadService
 import com.wanblog.R
 import com.wanblog.base.BaseFragment
 import com.wanblog.data.model.bean.BlogBean
-import com.wanblog.databinding.FragmentHomeTabBinding
 import com.wanblog.ext.loadServiceInit
 import com.wanblog.ext.showEmpty
 import com.wanblog.model.bean.Top3Bean
@@ -36,7 +35,7 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.concurrent.TimeUnit
 
-class HomeTabFragment : BaseFragment<HomeTabViewModel, FragmentHomeTabBinding>() {
+class HomeTabFragment : BaseFragment<HomeTabViewModel>() {
 
     //界面状态管理者
     private lateinit var mLoadsir: LoadService<Any>

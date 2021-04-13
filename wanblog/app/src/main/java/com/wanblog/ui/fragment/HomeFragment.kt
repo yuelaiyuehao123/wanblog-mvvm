@@ -1,18 +1,18 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.kingja.loadsir.core.LoadService
 import com.wanblog.R
 import com.wanblog.base.BaseFragment
-import com.wanblog.databinding.FragmentHomeBinding
 import com.wanblog.ext.*
+import com.wanblog.network.manager.NetState
 import com.wanblog.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<HomeViewModel>() {
 
     //fragment集合
     private var mFragments: ArrayList<Fragment> = arrayListOf()

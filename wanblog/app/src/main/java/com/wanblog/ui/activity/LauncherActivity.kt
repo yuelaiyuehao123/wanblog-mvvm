@@ -6,7 +6,6 @@ import com.wanblog.R
 import com.wanblog.WanBlogApp
 import com.wanblog.base.BaseActivity
 import com.wanblog.base.BaseViewModel
-import com.wanblog.databinding.ActivityLauncherBinding
 import com.wanblog.ext.view.gone
 import com.wanblog.ext.view.visible
 import com.wanblog.ui.adapter.LauncherBannerAdapter
@@ -18,11 +17,14 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.uiThread
 
-class LauncherActivity : BaseActivity<BaseViewModel, ActivityLauncherBinding>() {
+class LauncherActivity : BaseActivity<BaseViewModel>() {
 
     override fun layoutId(): Int = R.layout.activity_launcher
 
     private var mList = mutableListOf("Wan", "Blog")
+
+    override fun createObserver() {
+    }
 
     override fun initView(savedInstanceState: Bundle?) {
         //防止出现按Home键回到桌面时，再次点击重新进入该界面bug
@@ -30,11 +32,14 @@ class LauncherActivity : BaseActivity<BaseViewModel, ActivityLauncherBinding>() 
             finish()
             return
         }
-        mDatabind.click = ProxyClick()
+
+        bt_launcher.setOnClickListener {
+            gotoMainActivity()
+        }
 
         if (UserUtil.isFirst(WanBlogApp.instance)) {
             //是第一次打开App 显示引导页
-            welcome_image.gone()
+            iv_launcher.gone()
             val adapter = LauncherBannerAdapter(mList, this)
             banner_launcher.let {
                 it.indicator = CircleIndicator(this)
@@ -50,7 +55,7 @@ class LauncherActivity : BaseActivity<BaseViewModel, ActivityLauncherBinding>() 
 
                     override fun onPageSelected(position: Int) {
                         if (position == mList.size - 1) {
-                            welcomeJoin.visible()
+                            bt_launcher.visible()
                         }
                     }
 
@@ -61,7 +66,7 @@ class LauncherActivity : BaseActivity<BaseViewModel, ActivityLauncherBinding>() 
             }
         } else {
             //不是第一次打开App 1.5秒后自动跳转到主页
-            welcome_image.visible()
+            iv_launcher.visible()
             doAsync {
                 Thread.sleep(1500)
                 uiThread {
@@ -74,14 +79,12 @@ class LauncherActivity : BaseActivity<BaseViewModel, ActivityLauncherBinding>() 
         }
     }
 
-    inner class ProxyClick {
-        fun toMain() {
-            UserUtil.saveIsFirst(WanBlogApp.instance, false)
-            startActivity<MainActivity>()
-            finish()
-            //带点渐变动画
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-        }
+    private fun gotoMainActivity() {
+        UserUtil.saveIsFirst(WanBlogApp.instance, false)
+        startActivity<MainActivity>()
+        finish()
+        //带点渐变动画
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
 }

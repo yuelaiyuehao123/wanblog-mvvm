@@ -13,6 +13,15 @@ interface ApiService {
         const val SERVER_URL = "http://www.yuelaiyuehao.top"
     }
 
+    @POST(ApiSettings.signUp)
+    fun signUp(@Body body: RequestBody): ApiResponse<Any>
+
+    @POST(ApiSettings.login)
+    suspend fun login(@Body body: RequestBody): ApiResponse<UserInfo>
+
+    @GET(ApiSettings.logout)
+    suspend fun logout(): ApiResponse<Any>
+
     @GET(ApiSettings.blog_top3_list)
     suspend fun getTop3List(): ApiResponse<ArrayList<Top3Bean>>
 
@@ -20,11 +29,5 @@ interface ApiService {
     suspend fun getBlogList(
         @Query("currentPage") currentPage: Int, @Query("size") size: Int
     ): ApiResponse<ArrayList<BlogBean>>
-
-    @POST(ApiSettings.login)
-    suspend fun login(@Body body: RequestBody): ApiResponse<UserInfo>
-
-    @GET(ApiSettings.logout)
-    suspend fun logout(): ApiResponse<Any>
 
 }

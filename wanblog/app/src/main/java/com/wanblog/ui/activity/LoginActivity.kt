@@ -5,21 +5,18 @@ import android.text.TextUtils
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.wanblog.R
 import com.wanblog.base.BaseActivity
-import com.wanblog.databinding.ActivityLoginBinding
-import com.wanblog.ext.hideSoftKeyboard
-import com.wanblog.ext.initClose
-import com.wanblog.ext.showMessage
+import com.wanblog.ext.*
 import com.wanblog.util.SettingUtil
+import com.wanblog.util.UserUtil
 import com.wanblog.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.include_toolbar.*
 import org.jetbrains.anko.startActivity
-import androidx.lifecycle.Observer
-import com.wanblog.util.UserUtil
 
-class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
+class LoginActivity : BaseActivity<LoginViewModel>() {
 
     //请求数据ViewModel
     private val mLoginViewModel: LoginViewModel by viewModels()
@@ -27,10 +24,6 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
     override fun layoutId(): Int = R.layout.activity_login
 
     override fun initView(savedInstanceState: Bundle?) {
-
-        mDatabind.viewmodel = mViewModel
-
-        mDatabind.click = ProxyClick()
 
         toolbar.initClose("登录") {
             finish()

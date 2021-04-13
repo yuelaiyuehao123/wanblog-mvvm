@@ -13,7 +13,6 @@ class LauncherBannerAdapter(title: MutableList<String>, val context: Context) :
     BannerAdapter<String, LauncherBannerAdapter.ViewHolder>(title) {
 
 
-
     override fun onCreateHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(context).inflate(R.layout.item_launcher_banner_item, parent, false)

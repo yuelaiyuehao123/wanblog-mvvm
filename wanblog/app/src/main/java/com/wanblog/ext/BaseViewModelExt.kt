@@ -1,17 +1,15 @@
 package com.wanblog.ext
 
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wanblog.WanBlogApp
 import com.wanblog.base.BaseViewModel
-import com.wanblog.base.BaseVmActivity
-import com.wanblog.base.BaseVmFragment
+import com.wanblog.base.BaseActivity
+import com.wanblog.base.BaseFragment
 import com.wanblog.ext.util.loge
 import com.wanblog.network.*
 import kotlinx.coroutines.*
-import java.util.*
 
 /**
  * 描述　:BaseViewModel请求协程封装
@@ -25,7 +23,7 @@ import java.util.*
  * @param onError 失败回调
  *
  */
-fun <T> BaseVmActivity<*>.parseState(
+fun <T> BaseActivity<*>.parseState(
     resultState: ResultState<T>,
     onSuccess: (T) -> Unit,
     onError: ((AppException) -> Unit)? = null,
@@ -55,7 +53,7 @@ fun <T> BaseVmActivity<*>.parseState(
  * @param onError 失败回调
  *
  */
-fun <T> BaseVmFragment<*>.parseState(
+fun <T> BaseFragment<*>.parseState(
     resultState: ResultState<T>,
     onSuccess: (T) -> Unit,
     onError: ((AppException) -> Unit)? = null,
