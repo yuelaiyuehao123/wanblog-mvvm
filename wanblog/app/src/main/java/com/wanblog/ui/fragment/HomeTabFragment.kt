@@ -1,6 +1,7 @@
 package com.wanblog.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
@@ -15,14 +16,14 @@ import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.jakewharton.rxbinding4.view.clicks
 import com.kingja.loadsir.core.LoadService
 import com.wanblog.R
 import com.wanblog.base.BaseFragment
-import com.wanblog.data.model.bean.BlogBean
+import com.wanblog.bean.BlogBean
 import com.wanblog.ext.loadServiceInit
 import com.wanblog.ext.showEmpty
-import com.wanblog.model.bean.Top3Bean
+import com.wanblog.bean.Top3Bean
+import com.wanblog.ext.view.clickNoRepeat
 import com.wanblog.ui.adapter.BaseDelegateAdapter
 import com.wanblog.ui.adapter.HomeBannerAdapter
 import com.wanblog.viewmodel.HomeTabViewModel
@@ -41,20 +42,25 @@ class HomeTabFragment : BaseFragment<HomeTabViewModel>() {
     private lateinit var mLoadsir: LoadService<Any>
 
     //vLayout
-    val VLAYOUT_BANNER = 1         //轮播图
-    val VLAYOUT_GRID = 2           //网格
-    val VLAYOUT_LIST = 3           //普通列表
+    //轮播图
+    val VLAYOUT_BANNER = 1
+
+    //网格
+    val VLAYOUT_GRID = 2
+
+    //普通列表
+    val VLAYOUT_LIST = 3
 
     //总适配器
     var mDelegateAdapter: DelegateAdapter? = null
 
-    // 存放各个模块的适配器
+    //存放各个模块的适配器
     private var mAdapters: MutableList<DelegateAdapter.Adapter<*>> = mutableListOf()
 
-    // 前三名数据
+    //前三名数据
     private var mTop3List: MutableList<Top3Bean> = mutableListOf()
 
-    // 普通列表数据
+    //普通列表数据
     private var mBlogList: MutableList<BlogBean> = mutableListOf()
 
     override fun layoutId(): Int = R.layout.fragment_home_tab
@@ -215,17 +221,10 @@ class HomeTabFragment : BaseFragment<HomeTabViewModel>() {
                 tv_home_list_item_title.text = blog.title
                 tv_home_list_item_description.text = blog.description
                 tv_home_list_item_username.text = blog.username
-
-                //1秒钟之内禁用重复点击
-                ll_home_list_item.clicks()
-                    .throttleFirst(1, TimeUnit.SECONDS)
-                    .subscribe {
-//                        startActivity<BlogActivity>(
-//                            BlogActivity.blog_is_new_key to false,
-//                            BlogActivity.blog_id_key to blog.bid,
-//                            BlogActivity.blog_user_id_key to blog.uid
-//                        )
-                    }
+                //500毫秒之内禁用重复点击
+                ll_home_list_item.clickNoRepeat {
+                    Toast.makeText(activity, "点击了" + blog.title, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

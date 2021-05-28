@@ -1,9 +1,9 @@
 package com.wanblog.network
 
-import com.wanblog.data.model.bean.ApiResponse
-import com.wanblog.data.model.bean.BlogBean
-import com.wanblog.data.model.bean.UserInfo
-import com.wanblog.model.bean.Top3Bean
+import com.wanblog.bean.ApiResponse
+import com.wanblog.bean.BlogBean
+import com.wanblog.bean.UserInfo
+import com.wanblog.bean.Top3Bean
 import okhttp3.RequestBody
 import retrofit2.http.*
 

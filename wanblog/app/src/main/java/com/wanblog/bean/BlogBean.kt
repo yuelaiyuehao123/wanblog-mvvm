@@ -1,4 +1,4 @@
-package com.wanblog.data.model.bean
+package com.wanblog.bean
 
 data class BlogBean(
     val bid: Long,

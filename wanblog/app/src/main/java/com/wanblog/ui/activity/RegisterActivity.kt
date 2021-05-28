@@ -44,7 +44,7 @@ class RegisterActivity : BaseActivity<RegisterViewModel>() {
                 Toast.makeText(this@RegisterActivity, "两次密码不一致", Toast.LENGTH_SHORT).show()
                 return
             }
-            mViewModel.signUp(userName, password1)
+            mViewModel.signUp(userName!!, password1!!)
         }
 
         var onCheckedChangeListener1 =

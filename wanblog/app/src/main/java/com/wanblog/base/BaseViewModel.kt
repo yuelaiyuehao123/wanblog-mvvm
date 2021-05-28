@@ -1,7 +1,7 @@
 package com.wanblog.base
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.wanblog.livedata.EventLiveData
 
 open class BaseViewModel : ViewModel() {
 
@@ -15,12 +15,12 @@ open class BaseViewModel : ViewModel() {
     inner class UiLoadingChange {
         //显示加载框
         val showDialog by lazy {
-            EventLiveData<String>()
+            MutableLiveData<String>()
         }
 
         //隐藏
         val dismissDialog by lazy {
-            EventLiveData<Boolean>()
+            MutableLiveData<Boolean>()
         }
     }
 

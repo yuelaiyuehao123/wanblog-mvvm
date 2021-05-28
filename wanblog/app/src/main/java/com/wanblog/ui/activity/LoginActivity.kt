@@ -64,7 +64,7 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
                 Toast.makeText(this@LoginActivity, "密码不能为空", Toast.LENGTH_SHORT).show()
                 return
             }
-            mViewModel.login(userName, password)
+            mViewModel.login(userName!!, password!!)
         }
 
         fun goRegister() {

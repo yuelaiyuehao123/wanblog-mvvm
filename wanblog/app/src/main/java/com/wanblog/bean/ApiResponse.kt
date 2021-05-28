@@ -1,4 +1,4 @@
-package com.wanblog.data.model.bean
+package com.wanblog.bean
 
 import com.wanblog.network.BaseResponse
 

@@ -1,3 +1,3 @@
-package com.wanblog.data.model.bean
+package com.wanblog.bean
 
 class CollectBus(var id: Int, var collect: Boolean)

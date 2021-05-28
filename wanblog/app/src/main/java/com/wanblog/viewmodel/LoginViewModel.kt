@@ -2,22 +2,20 @@ package com.wanblog.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.wanblog.base.BaseViewModel
-import com.wanblog.data.model.bean.UserInfo
+import com.wanblog.bean.UserInfo
 import com.wanblog.ext.request
 import com.wanblog.network.RequsetUtil
 import com.wanblog.network.apiService
-import me.hgj.jetpackmvvm.callback.livedata.BooleanLiveData
-import me.hgj.jetpackmvvm.callback.livedata.StringLiveData
 import org.json.JSONObject
 
 class LoginViewModel : BaseViewModel() {
 
     //用户名
-    var username = StringLiveData()
+    var username = MutableLiveData<String>()
     //密码
-    var password = StringLiveData()
+    var password = MutableLiveData<String>()
     //是否显示明文密码（登录注册界面）
-    var isShowPwd = BooleanLiveData()
+    var isShowPwd = MutableLiveData<Boolean>()
     //
     var loginResult = MutableLiveData<UserInfo>()
 

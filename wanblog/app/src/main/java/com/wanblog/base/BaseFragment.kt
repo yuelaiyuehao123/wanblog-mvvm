@@ -79,7 +79,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
             handler.postDelayed({
                 lazyLoadData()
                 //在Fragment中，只有懒加载过了才能开启网络变化监听
-                NetworkStateManager.instance.mNetworkStateCallback.observeInFragment(
+                NetworkStateManager.instance.mNetworkStateCallback.observe(
                     this,
                     Observer {
                         //不是首次订阅时调用方法，防止数据第一次监听错误
@@ -96,10 +96,10 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
      * 注册 UI 事件
      */
     private fun registorDefUIChange() {
-        mViewModel.loadingChange.showDialog.observeInFragment(this, Observer {
+        mViewModel.loadingChange.showDialog.observe(viewLifecycleOwner, Observer {
             showLoading(it)
         })
-        mViewModel.loadingChange.dismissDialog.observeInFragment(this, Observer {
+        mViewModel.loadingChange.dismissDialog.observe(viewLifecycleOwner, Observer {
             dismissLoading()
         })
     }
@@ -111,11 +111,11 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     protected fun addLoadingObserve(vararg viewModels: BaseViewModel) {
         viewModels.forEach { viewModel ->
             //显示弹窗
-            viewModel.loadingChange.showDialog.observeInFragment(this, Observer {
+            viewModel.loadingChange.showDialog.observe(this, Observer {
                 showLoading(it)
             })
             //关闭弹窗
-            viewModel.loadingChange.dismissDialog.observeInFragment(this, Observer {
+            viewModel.loadingChange.dismissDialog.observe(this, Observer {
                 dismissLoading()
             })
         }

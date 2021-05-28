@@ -30,7 +30,7 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
         registerUiChange()
         initView(savedInstanceState)
         createObserver()
-        NetworkStateManager.instance.mNetworkStateCallback.observeInActivity(this, Observer {
+        NetworkStateManager.instance.mNetworkStateCallback.observe(this, Observer {
             onNetworkStateChanged(it)
         })
     }
@@ -47,11 +47,11 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
      */
     private fun registerUiChange() {
         //显示弹窗
-        mViewModel.loadingChange.showDialog.observeInActivity(this, Observer {
+        mViewModel.loadingChange.showDialog.observe(this, Observer {
             showLoading(it)
         })
         //关闭弹窗
-        mViewModel.loadingChange.dismissDialog.observeInActivity(this, Observer {
+        mViewModel.loadingChange.dismissDialog.observe(this, Observer {
             dismissLoading()
         })
     }
@@ -63,11 +63,11 @@ abstract class BaseActivity<VM : BaseViewModel> : AppCompatActivity() {
     protected fun addLoadingObserve(vararg viewModels: BaseViewModel) {
         viewModels.forEach { viewModel ->
             //显示弹窗
-            viewModel.loadingChange.showDialog.observeInActivity(this, Observer {
+            viewModel.loadingChange.showDialog.observe(this, Observer {
                 showLoading(it)
             })
             //关闭弹窗
-            viewModel.loadingChange.dismissDialog.observeInActivity(this, Observer {
+            viewModel.loadingChange.dismissDialog.observe(this, Observer {
                 dismissLoading()
             })
         }

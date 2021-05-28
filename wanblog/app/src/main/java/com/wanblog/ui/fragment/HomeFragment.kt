@@ -37,16 +37,6 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
         magic_indicator.bindViewPager2(view_pager, mDataList)
     }
 
-    /**
-     * 懒加载
-     */
-    override fun lazyLoadData() {
-        //设置界面 加载中
-        mLoadsir.showLoading()
-        //请求标题数据
-        mViewModel.getTabData()
-    }
-
     override fun createObserver() {
         mViewModel.titleData.observe(viewLifecycleOwner, Observer {
             mDataList.clear()
@@ -60,6 +50,16 @@ class HomeFragment : BaseFragment<HomeViewModel>() {
             view_pager.offscreenPageLimit = mFragments.size
             mLoadsir.showSuccess()
         })
+    }
+
+    /**
+     * 懒加载
+     */
+    override fun lazyLoadData() {
+        //设置界面 加载中
+        mLoadsir.showLoading()
+        //请求标题数据
+        mViewModel.getTabData()
     }
 
 }

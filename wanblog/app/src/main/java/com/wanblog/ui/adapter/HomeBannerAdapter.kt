@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wanblog.R
-import com.wanblog.model.bean.Top3Bean
+import com.wanblog.bean.Top3Bean
 import com.youth.banner.adapter.BannerAdapter
 import kotlinx.android.synthetic.main.item_home_banner_item.view.*
 

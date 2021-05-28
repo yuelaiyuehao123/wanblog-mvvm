@@ -2,9 +2,9 @@ package com.wanblog.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.wanblog.base.BaseViewModel
-import com.wanblog.data.model.bean.BlogBean
+import com.wanblog.bean.BlogBean
 import com.wanblog.ext.request
-import com.wanblog.model.bean.Top3Bean
+import com.wanblog.bean.Top3Bean
 import com.wanblog.network.apiService
 
 class HomeTabViewModel : BaseViewModel() {

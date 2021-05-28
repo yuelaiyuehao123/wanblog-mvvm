@@ -1,4 +1,4 @@
-package com.wanblog.data.model.bean
+package com.wanblog.bean
 
 /**
  * 用户信息
