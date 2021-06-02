@@ -143,8 +143,6 @@ fun Fragment.joinQQGroup(key: String): Boolean {
  * 拦截登录操作，如果没有登录跳转登录，登录过了贼执行你的方法
  */
 fun NavController.jumpByLogin(action: (NavController) -> Unit) {
-    var isLogin = UserUtil.isLogin(WanBlogApp.instance)
-    Log.d("abc","isLogin-->"+isLogin)
     if (UserUtil.isLogin(WanBlogApp.instance)) {
         action(this)
     } else {

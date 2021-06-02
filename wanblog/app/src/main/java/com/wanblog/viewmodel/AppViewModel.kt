@@ -2,8 +2,8 @@ package com.wanblog.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.wanblog.base.BaseViewModel
+import com.wanblog.bean.UserInfo
 import com.wanblog.ext.appContext
-import com.wanblog.util.SettingUtil
 import com.wanblog.util.UserUtil
 
 /**
@@ -12,16 +12,11 @@ import com.wanblog.util.UserUtil
  */
 class AppViewModel : BaseViewModel() {
 
-    var userName = com.kunminx.architecture.ui.callback.UnPeekLiveData.Builder<String>()
-        .setAllowNullValue(true).create()
-
-    //App主题颜色 中大型项目不推荐以这种方式改变主题颜色，比较繁琐耦合，且容易有遗漏某些控件没有设置主题色
-    var appColor = MutableLiveData<Int>()
+    var mUserInfo = MutableLiveData<UserInfo>()
 
     init {
-        //默认值保存的账户信息，没有登陆过则为null
-        userName.value = UserUtil.getUserName(appContext)
-        //默认值颜色
-        appColor.value = SettingUtil.getColor(appContext)
+        val user = UserUtil.getUser(appContext)
+        mUserInfo.value = user
     }
+
 }

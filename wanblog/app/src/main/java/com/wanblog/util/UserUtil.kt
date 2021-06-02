@@ -2,16 +2,17 @@ package com.wanblog.util
 
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
+import com.wanblog.bean.UserInfo
 
 object UserUtil {
 
-    private val TOKEN: String = "token"
-    private val USER_NAME: String = "user_name"
-    private val USER_ID: String = "user_id"
-    private val USER_IMAGE: String = "user_image"
-
+    private val USER: String = "user"
     private val IS_FIRST: String = "is_first"
 
+    /**
+     * 判断是否第一次打开APP
+     */
     fun isFirst(context: Context): Boolean {
         return SharedPreferencesUtil.getInstance(context).getBoolean(IS_FIRST)
     }
@@ -23,70 +24,28 @@ object UserUtil {
         SharedPreferencesUtil.getInstance(context).putBoolean(IS_FIRST, isFirst)
     }
 
+    /**
+     * 保存用户信息
+     */
+    fun saveUser(context: Context, userInfo: UserInfo?) {
+        val userInfoStr = GsonUtil.bean2json(userInfo)
+        SharedPreferencesUtil.getInstance(context).putString(USER, userInfoStr)
+    }
+
+    /**
+     * 得到用户信息
+     */
+    fun getUser(context: Context): UserInfo? {
+        val userInfoStr = SharedPreferencesUtil.getInstance(context).getString(USER)
+        return GsonUtil.json2bean(userInfoStr, UserInfo::class.java)
+    }
+
+    /**
+     * 判断是否登录
+     */
     fun isLogin(context: Context): Boolean {
-        val token = getToken(context);
-        return !TextUtils.isEmpty(token);
+        val user = getUser(context)
+        return user != null
     }
 
-    /**
-     * 保存Token
-     */
-    fun saveToken(context: Context, token: String) {
-        SharedPreferencesUtil.getInstance(context).putString(TOKEN, token)
-    }
-
-    /**
-     * 得到Token
-     */
-    fun getToken(context: Context): String =
-        SharedPreferencesUtil.getInstance(context).getString(TOKEN)
-
-    /**
-     * 得到用户名
-     */
-    fun getUserName(context: Context): String =
-        SharedPreferencesUtil.getInstance(context).getString(USER_NAME)
-
-    /**
-     * 保存用户名
-     */
-    fun saveUserName(context: Context, name: String) {
-        SharedPreferencesUtil.getInstance(context).putString(USER_NAME, name)
-    }
-
-    /**
-     * 得到用户名头像
-     */
-    fun getUserImage(context: Context): String {
-//        return    SharedPreferencesUtil.getInstance(context).getString(USER_IMAGE)
-        return ColorUtil.randomImage()
-    }
-
-
-    /**
-     * 保存用户名头像
-     */
-    fun saveUserImage(context: Context, imageUrl: String) {
-        SharedPreferencesUtil.getInstance(context).putString(USER_IMAGE, imageUrl)
-    }
-
-
-    /**
-     * 得到用户id
-     */
-    fun getUserId(context: Context): Long =
-        SharedPreferencesUtil.getInstance(context).getLong(USER_ID)
-
-    /**
-     * 保存用户id
-     */
-    fun saveUserId(context: Context, id: Long) {
-        SharedPreferencesUtil.getInstance(context).putLong(USER_ID, id)
-    }
-
-    fun logout(context: Context) {
-        val isFirst = isFirst(context)
-        SharedPreferencesUtil.getInstance(context).clearSp()
-        saveIsFirst(context, isFirst)
-    }
 }

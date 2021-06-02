@@ -10,13 +10,6 @@ import org.json.JSONObject
 
 class LoginViewModel : BaseViewModel() {
 
-    //用户名
-    var username = MutableLiveData<String>()
-    //密码
-    var password = MutableLiveData<String>()
-    //是否显示明文密码（登录注册界面）
-    var isShowPwd = MutableLiveData<Boolean>()
-    //
     var loginResult = MutableLiveData<UserInfo>()
 
     /**

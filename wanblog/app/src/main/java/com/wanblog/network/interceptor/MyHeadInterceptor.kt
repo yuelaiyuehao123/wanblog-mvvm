@@ -1,5 +1,6 @@
 package com.wanblog.network.interceptor
 
+import android.text.TextUtils
 import com.wanblog.WanBlogApp
 import com.wanblog.network.ApiSettings
 import com.wanblog.util.UserUtil
@@ -12,7 +13,11 @@ class MyHeadInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val builder = chain.request().newBuilder()
-        builder.addHeader(ApiSettings.tokenKey, UserUtil.getToken(WanBlogApp.instance)).build()
+        val user = UserUtil.getUser(WanBlogApp.instance)
+        val token = user?.token
+        if (!TextUtils.isEmpty(token)) {
+            builder.addHeader(ApiSettings.tokenKey, token!!).build()
+        }
         builder.addHeader("device", "Android").build()
         return chain.proceed(builder.build())
     }

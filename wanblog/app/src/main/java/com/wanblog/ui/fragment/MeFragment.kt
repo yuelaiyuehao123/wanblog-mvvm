@@ -2,11 +2,15 @@ package com.wanblog.ui.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.wanblog.R
+import com.wanblog.WanBlogApp
 import com.wanblog.base.BaseFragment
+import com.wanblog.bean.UserInfo
+import com.wanblog.ext.appContext
 import com.wanblog.ext.jumpByLogin
 import com.wanblog.ext.nav
 import com.wanblog.ext.navigateAction
@@ -14,6 +18,7 @@ import com.wanblog.util.UserUtil
 import com.wanblog.viewmodel.MeViewModel
 import kotlinx.android.synthetic.main.dialog_logout.view.*
 import kotlinx.android.synthetic.main.fragment_me.*
+import org.w3c.dom.Text
 
 class MeFragment : BaseFragment<MeViewModel>() {
 
@@ -43,30 +48,24 @@ class MeFragment : BaseFragment<MeViewModel>() {
     }
 
     override fun createObserver() {
-        appViewModel.run {
-            userName.observeInFragment(this@MeFragment, Observer {
-                mViewModel.userName.value = it
-                mViewModel.imageUrl.value = UserUtil.getUserImage(mActivity)
-            })
-        }
+
+        appViewModel.mUserInfo.observe(this@MeFragment, Observer {
+            if (it == null) {
+                UserUtil.saveUser(WanBlogApp.instance, null)
+                tv_me_name.text = "请登录"
+            } else {
+                tv_me_name.text = it.username
+            }
+        })
+
+        mViewModel.logoutResult.observe(this@MeFragment, Observer {
+            appViewModel.mUserInfo.value = null
+        })
+
     }
 
     override fun lazyLoadData() {
-    }
 
-    override fun initData() {
-        val name: String
-        val imageUrl: String
-        if (UserUtil.isLogin(mActivity)) {
-            name = UserUtil.getUserName(mActivity)
-//            imageUrl = UserUtil.getUserImage(mActivity)
-            imageUrl = "http://test-public-cn.bj.bcebos.com/sota/test/500939980.jpg"
-        } else {
-            name = "请登录"
-            imageUrl = ""
-        }
-        mViewModel.userName.value = name
-        mViewModel.imageUrl.value = imageUrl
     }
 
     private fun showLogoutDialog() {
@@ -83,6 +82,5 @@ class MeFragment : BaseFragment<MeViewModel>() {
             dialog.dismiss()
         }
     }
-
 
 }
