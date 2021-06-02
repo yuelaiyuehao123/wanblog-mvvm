@@ -19,7 +19,7 @@ class LauncherActivity : BaseActivity<BaseViewModel>() {
 
     override fun layoutId(): Int = R.layout.activity_launcher
 
-    private var mList = mutableListOf("Wan", "Blog")
+    private var mList = mutableListOf("To", "The", "Moon")
 
     override fun createObserver() {
     }
@@ -32,9 +32,9 @@ class LauncherActivity : BaseActivity<BaseViewModel>() {
 
         if (UserUtil.isFirst(WanBlogApp.instance)) {
             //是第一次打开App 显示引导页
-            iv_launcher.visibility = View.GONE
             val adapter = LauncherBannerAdapter(mList, this)
-            banner_launcher.indicator = CircleIndicator(this)
+            val circleIndicator = CircleIndicator(this)
+            banner_launcher.indicator = circleIndicator
             banner_launcher.setBannerRound(0f)
             banner_launcher.isAutoLoop(false)
             banner_launcher.addOnPageChangeListener(object : OnPageChangeListener {
@@ -57,7 +57,6 @@ class LauncherActivity : BaseActivity<BaseViewModel>() {
             banner_launcher.adapter = adapter
         } else {
             //不是第一次打开App 1.5秒后自动跳转到主页
-            iv_launcher.visibility = View.VISIBLE
             doAsync {
                 Thread.sleep(1500)
                 uiThread {
