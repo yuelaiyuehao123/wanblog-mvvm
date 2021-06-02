@@ -2,7 +2,8 @@ package com.wanblog.ui.activity
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
@@ -29,6 +30,18 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
             finish()
         }
 
+        iv_login_username_clear.setOnClickListener {
+            et_login_username.setText("");
+        }
+
+        cb_login_password.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                et_login_password.transformationMethod = HideReturnsTransformationMethod.getInstance();
+            } else {
+                et_login_password.transformationMethod = PasswordTransformationMethod.getInstance();
+            }
+        }
+
         tv_go_login.setOnClickListener {
             login()
         }
@@ -48,8 +61,8 @@ class LoginActivity : BaseActivity<LoginViewModel>() {
     }
 
     private fun login() {
-        val userName = et_username.text.toString()
-        val password = et_password.text.toString()
+        val userName = et_login_username.text.toString()
+        val password = et_login_password.text.toString()
         if (TextUtils.isEmpty(userName)) {
             Toast.makeText(this@LoginActivity, "账号不能为空", Toast.LENGTH_SHORT).show()
             return

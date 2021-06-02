@@ -2,15 +2,12 @@ package com.wanblog.ui.fragment
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.wanblog.R
 import com.wanblog.WanBlogApp
 import com.wanblog.base.BaseFragment
-import com.wanblog.bean.UserInfo
-import com.wanblog.ext.appContext
 import com.wanblog.ext.jumpByLogin
 import com.wanblog.ext.nav
 import com.wanblog.ext.navigateAction
@@ -18,7 +15,6 @@ import com.wanblog.util.UserUtil
 import com.wanblog.viewmodel.MeViewModel
 import kotlinx.android.synthetic.main.dialog_logout.view.*
 import kotlinx.android.synthetic.main.fragment_me.*
-import org.w3c.dom.Text
 
 class MeFragment : BaseFragment<MeViewModel>() {
 
