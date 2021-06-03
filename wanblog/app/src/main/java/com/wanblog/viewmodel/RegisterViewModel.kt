@@ -9,21 +9,6 @@ import org.json.JSONObject
 
 class RegisterViewModel : BaseViewModel() {
 
-    // 用户名
-    var username = MutableLiveData<String>()
-
-    // 密码1
-    var password1 = MutableLiveData<String>()
-
-    //是否显示明文密码（登录注册界面）
-    var isShowPwd1 = MutableLiveData<Boolean>()
-
-    // 密码2
-    var password2 = MutableLiveData<String>()
-
-    //是否显示明文密码（登录注册界面）
-    var isShowPwd2 = MutableLiveData<Boolean>()
-
     // 注册结果
     var registerResult = MutableLiveData<Boolean>()
 

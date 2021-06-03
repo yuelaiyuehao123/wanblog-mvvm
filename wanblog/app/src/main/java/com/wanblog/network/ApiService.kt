@@ -14,7 +14,7 @@ interface ApiService {
     }
 
     @POST(ApiSettings.signUp)
-    fun signUp(@Body body: RequestBody): ApiResponse<Any>
+    suspend fun signUp(@Body body: RequestBody): ApiResponse<Any>
 
     @POST(ApiSettings.login)
     suspend fun login(@Body body: RequestBody): ApiResponse<UserInfo>
